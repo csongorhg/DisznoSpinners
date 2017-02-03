@@ -37,12 +37,15 @@ public class PlayStage extends MyStage {
 
     public static float hurkaIdozito;
     public static float palinkaIdozito;
+    public static float tuzIdozito;
 
     private HusdaraloSound husdaraloSound;
 
     private static ArrayList<OneSpriteStaticActor> esodolgok;
     private static OneSpriteStaticActor palinkaKijelzoActor, palinkasPohar;
     public static int palinkaSzint, jelenlegiPalinkaSzint;
+
+    private OneSpriteAnimatedActor tuz;
 
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
@@ -80,13 +83,14 @@ public class PlayStage extends MyStage {
 
     @Override
     public void act(float delta) {
-
         super.act(delta);
+
         elapsedTime += delta;
         husTime += delta;
         nonhusTime += delta;
         gyilkosTime += delta;
         palinkaTime += delta;
+
         palinkaIdozito += delta;
 
         kolbaszTolto.act(delta);
@@ -97,7 +101,7 @@ public class PlayStage extends MyStage {
 
 
         //pálinkaszint váltása - 10mp ként 1 fogy
-        if (palinkaIdozito >= 1) {
+        if (palinkaIdozito >= 10) {
             palinkaSzint--;
             palinkaIdozito = 0;
             palinkaszint();
@@ -124,7 +128,20 @@ public class PlayStage extends MyStage {
             husdaraloSound.stop();
         }
 
+
+        //tüz
+        if (tuzIdozito > 0.0f && tuz != null) {
+            tuz.setX(kolbaszTolto.getX());
+            tuzIdozito -= delta;
+            if (tuzIdozito < 0) tuzIdozito = 0;
+        }
+        if (tuzIdozito <= 0.0f && tuz != null) {
+            tuz.remove();
+        }
+        //tüz
+
     }
+
 
     private void utkozik() {
         for (int i = 0; i < esodolgok.size(); i++) {
@@ -152,6 +169,12 @@ public class PlayStage extends MyStage {
                             palinkaSzint++;
                             palinkaszint();
                         }
+                    }else if (a instanceof Paprika) {
+                        tuz = new Tuz();
+                        tuz.setLooping(true);
+                        tuz.setY(kolbaszTolto.getY() + kolbaszTolto.getHeight());
+                        addActor(tuz);
+                        tuzIdozito = 1;
                     }
 
                     a.remove();
@@ -175,9 +198,15 @@ public class PlayStage extends MyStage {
             }
         }
     private void esik(){
-        if(elapsedTime > 50){
+        if(elapsedTime > 20){
             elapsedTime = 0;
             speed++;
+            Paprika paprika = new Paprika(Assets.manager.get(Assets.PAPRIKA));
+            paprika.setPosition(vel(((ExtendViewport) getViewport()).getMaxWorldWidth(), ((ExtendViewport) getViewport()).getMinWorldWidth() - paprika.getWidth()), getViewport().getWorldHeight());
+            addActor(paprika);
+            esodolgok.add(paprika);
+            paprika.setSpeed(speed + 2);
+
         }
         if(husTime > 2){
             husTime = 0;
@@ -225,6 +254,7 @@ public class PlayStage extends MyStage {
             esodolgok.add(palinka);
             palinka.setSpeed(speed + 1);
         }
+
     }
 
     private int vel(int a, int b){

@@ -50,6 +50,8 @@ public class Assets {
 			= new AssetDescriptor<TextureAtlas>("Explosion/explosion.atlas", TextureAtlas.class);
 	public static final AssetDescriptor<TextureAtlas> DARALO_TEXTUREATLAS
 			= new AssetDescriptor<TextureAtlas>("atlasok/daralo.atlas", TextureAtlas.class);
+	public static final AssetDescriptor<TextureAtlas> TUZ_TEXTUREATLAS
+			= new AssetDescriptor<TextureAtlas>("TestImg/tuz.atlas", TextureAtlas.class);
 
 
 	//BACKGROUND
@@ -108,6 +110,10 @@ public class Assets {
 	public static final AssetDescriptor<Texture> PALINKAPOHAR
 			= new AssetDescriptor<Texture>("TestImg/palinaspohar.png", Texture.class);
 
+	public static final AssetDescriptor<Texture> PAPRIKA
+			= new AssetDescriptor<Texture>("TestImg/erospaprika.png", Texture.class);
+
+
 
 
 
@@ -127,6 +133,7 @@ public class Assets {
 		manager.load(EXPLOSION_TEXTUREATLAS);
 		manager.load(DARALO_TEXTUREATLAS);
 		manager.load(DARALOALLO);
+		manager.load(TUZ_TEXTUREATLAS);
 
 		manager.load(MUSIC);
 		manager.load(SOUND);
@@ -158,6 +165,8 @@ public class Assets {
 
 		manager.load(PALINKA);
 		manager.load(PALINKAPOHAR);
+
+		manager.load(PAPRIKA);
 	}
 
     public static void afterLoaded() {
