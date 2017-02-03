@@ -2,6 +2,7 @@ package com.mygdx.game.Play;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -14,6 +15,8 @@ import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
 
+import java.util.ArrayList;
+
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
@@ -21,7 +24,9 @@ public class PlayStage extends MyStage {
     private TextButton textButton;
 
     private KolbaszTolto kolbaszTolto;
+    private static ArrayList<OneSpriteStaticActor> potyogoDolgok;
 
+    private static int dbPotyogas;
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -36,6 +41,7 @@ public class PlayStage extends MyStage {
 
         Husok husok = new Husok(Assets.manager.get(Assets.TEST_TEXTURE));
         addActor(husok);
+        potyogoDolgok.add(husok);
     }
 
     @Override
