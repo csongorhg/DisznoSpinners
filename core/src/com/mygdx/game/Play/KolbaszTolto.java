@@ -12,16 +12,16 @@ public class KolbaszTolto extends OneSpriteAnimatedActor {
 
     private OneSpriteAnimatedActor oneSpriteAnimatedActor;
 
+
     public KolbaszTolto() {
         super(Assets.manager.get(Assets.DARALO_TEXTUREATLAS));
         setSize(200,200);
-        setFps(30);
+        setFps(4);
+        setLooping(true);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
-
     }
-
 }
