@@ -167,10 +167,12 @@ public class PlayStage extends MyStage {
                     }else if (a instanceof Palinka) {
                         if ( (palinkaSzint+1) <= 15 ) {
                             palinkaSzint++;
+                            hurkaIdozito += 1.0f;
                             palinkaszint();
                         }
                     }else if (a instanceof Paprika) {
                         tuz = new Tuz();
+                        hurkaIdozito += 1.0f;
                         tuz.setLooping(true);
                         tuz.setY(kolbaszTolto.getY() + kolbaszTolto.getHeight());
                         addActor(tuz);
