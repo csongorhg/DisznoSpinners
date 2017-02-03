@@ -69,6 +69,10 @@ public class PlayStage extends MyStage {
         palinkaKijelzoActor.setSize(50,200);
         palinkaKijelzoActor.setPosition(0 , getViewport().getWorldHeight() - palinkaKijelzoActor.getHeight());
         addActor(palinkaKijelzoActor);
+        palinkasPohar = new OneSpriteStaticActor(Assets.manager.get(Assets.PALINKAPOHAR));
+        palinkasPohar.setSize(64,64);
+        palinkasPohar.setPosition(palinkaKijelzoActor.getWidth() / 2 - palinkasPohar.getWidth() / 2, palinkaKijelzoActor.getY() - palinkasPohar.getHeight());
+        addActor(palinkasPohar);
         jelenlegiPalinkaSzint = palinkaSzint;
         //pálinka
 
@@ -248,7 +252,7 @@ public class PlayStage extends MyStage {
             esodolgok.add(daraloGyilkos);
             daraloGyilkos.setSpeed(speed+2);
         }
-        if (palinkaTime > 5) {
+        if (palinkaTime > 5) {//itt
             palinkaTime = 0;
             Palinka palinka = new Palinka(Assets.manager.get(Assets.PALINKA));
             palinka.setPosition(vel(((ExtendViewport) getViewport()).getMaxWorldWidth(), ((ExtendViewport) getViewport()).getMinWorldWidth() - palinka.getWidth()), getViewport().getWorldHeight());
