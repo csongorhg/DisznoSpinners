@@ -61,6 +61,8 @@ public class Assets {
 			= new AssetDescriptor<Texture>("Menu/endhatter.png", Texture.class);
 	public static final AssetDescriptor<Texture> INGAMEGROUND
 			= new AssetDescriptor<Texture>("Menu/ingamehatter.png", Texture.class);
+	public static final AssetDescriptor<Texture> KERDOJEL
+			= new AssetDescriptor<Texture>("Menu/kerd.png", Texture.class);
 
 
 
@@ -81,6 +83,8 @@ public class Assets {
 			= new AssetDescriptor<Texture>("hus/disznoresz4.png", Texture.class);
 	public static final AssetDescriptor<Texture> HUS5
 			= new AssetDescriptor<Texture>("hus/disznoresz5.png", Texture.class);
+	public static final AssetDescriptor<Texture> ASSZONY
+			= new AssetDescriptor<Texture>("TestImg/oregasszony.png", Texture.class);
 
 	public static final AssetDescriptor<Texture> GYILKOS1
 			= new AssetDescriptor<Texture>("gyilkos/csont.png", Texture.class);
@@ -146,6 +150,7 @@ public class Assets {
 		manager.load(ENDBACKGROUND);
 		manager.load(INGAMEGROUND);
 
+		manager.load(KERDOJEL);
 		manager.load(HUS1);
 		manager.load(HUS2);
 		manager.load(HUS3);
@@ -156,6 +161,7 @@ public class Assets {
 		manager.load(GYILKOS3);
 		manager.load(RONT1);
 		manager.load(RONT2);
+		manager.load(ASSZONY);
 
 		manager.load(DISZNOCSONTVAZ);
 		manager.load(DISZNODARAB1);
