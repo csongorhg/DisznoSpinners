@@ -18,6 +18,8 @@ public class MenuStage extends MyStage {
     private TextButton textButton, textButton2, textButton3;
     private TextButton.TextButtonStyle textButtonStyle;
 
+    //Gdx.input.getAccelerometerX() / 2
+
     public MenuStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
     }
