@@ -23,7 +23,6 @@ public class PlayStage extends MyStage {
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
-        init();
     }
 
 
@@ -32,6 +31,9 @@ public class PlayStage extends MyStage {
 
         kolbaszTolto = new KolbaszTolto();
         addActor(kolbaszTolto);
+
+        Husok husok = new Husok(Assets.manager.get(Assets.TEST_TEXTURE));
+        addActor(husok);
     }
 
     @Override
