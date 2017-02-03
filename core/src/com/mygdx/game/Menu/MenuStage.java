@@ -50,7 +50,7 @@ public class MenuStage extends MyStage {
                 System.exit(0);
             }
         });
-        textButton3.setPosition(getViewport().getWorldWidth() / 2 - textButton3.getWidth() / 2,
+        textButton3.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth() / 2 - textButton3.getWidth() / 2,
                 ((ExtendViewport)getViewport()).getMinWorldHeight() / 2-textButton3.getHeight());
         addActor(textButton3);
 
@@ -66,7 +66,7 @@ public class MenuStage extends MyStage {
             }
         });
 
-        textButton2.setPosition(getViewport().getWorldWidth() / 2 - textButton2.getWidth() / 2,
+        textButton2.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth() / 2 - textButton2.getWidth() / 2,
                 ((ExtendViewport)getViewport()).getMinWorldHeight() / 2 + textButton2.getHeight());
         addActor(textButton2);
 
@@ -85,7 +85,7 @@ public class MenuStage extends MyStage {
 
         musicButton.setSize(128,128);
 
-        musicButton.setPosition(0,((ExtendViewport)getViewport()).getMinWorldHeight()-musicButton.getHeight());
+        musicButton.setPosition(((ExtendViewport)getViewport()).getMaxWorldWidth()-musicButton.getWidth()/2,((ExtendViewport)getViewport()).getMinWorldHeight()-musicButton.getHeight());
 
         addActor(musicButton);
 

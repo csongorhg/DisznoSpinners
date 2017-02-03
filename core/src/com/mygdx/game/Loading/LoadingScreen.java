@@ -42,11 +42,11 @@ public class LoadingScreen extends MyScreen {
 		};
 		stage.addActor(picture);
 
-		picture.setPosition(stage.getWidth()/2- picture.getWidth()/2,stage.getHeight()/2- picture.getHeight()/2);
+		picture.setPosition(stage.getViewport().getWorldWidth()/2- picture.getWidth()/2,stage.getHeight()/2- picture.getHeight()/2);
 
 		text = new OneSpriteStaticActor("Menu/justszoveg.png");
 		stage.addActor(text);
-		text.setPosition(stage.getWidth()/2-text.getWidth()/2,stage.getHeight()/2-text.getHeight()/2);
+		text.setPosition(stage.getViewport().getWorldWidth()/2-text.getWidth()/2,stage.getHeight()/2-text.getHeight()/2);
     }
 
 

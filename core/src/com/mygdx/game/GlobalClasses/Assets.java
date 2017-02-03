@@ -131,6 +131,16 @@ public class Assets {
 		manager.load(HUS4);
 		manager.load(HUS5);
 		manager.load(GYILKOS1);
+		manager.load(GYILKOS2);
+		manager.load(GYILKOS3);
+		manager.load(RONT1);
+		manager.load(RONT2);
+
+		manager.load(DISZNOCSONTVAZ);
+		manager.load(DISZNODARAB1);
+		manager.load(DISZNODARAB2);
+		manager.load(DISZNODARAB3);
+		manager.load(DISZNODARAB4);
 	}
 
     public static void afterLoaded() {
