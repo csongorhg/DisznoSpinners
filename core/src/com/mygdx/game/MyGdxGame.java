@@ -131,7 +131,6 @@ public class MyGdxGame extends Game {
 			catch (Exception e){
 				e.printStackTrace();
 			}
-			prevScreen.dispose();
 		}
 		super.setScreen(screen);
 	}
