@@ -81,6 +81,8 @@ public class Assets {
 			= new AssetDescriptor<Texture>("hus/disznoresz4.png", Texture.class);
 	public static final AssetDescriptor<Texture> HUS5
 			= new AssetDescriptor<Texture>("hus/disznoresz5.png", Texture.class);
+	public static final AssetDescriptor<Texture> ASSZONY
+			= new AssetDescriptor<Texture>("TestImg/oregasszony.png", Texture.class);
 
 	public static final AssetDescriptor<Texture> GYILKOS1
 			= new AssetDescriptor<Texture>("gyilkos/csont.png", Texture.class);
@@ -156,6 +158,7 @@ public class Assets {
 		manager.load(GYILKOS3);
 		manager.load(RONT1);
 		manager.load(RONT2);
+		manager.load(ASSZONY);
 
 		manager.load(DISZNOCSONTVAZ);
 		manager.load(DISZNODARAB1);
