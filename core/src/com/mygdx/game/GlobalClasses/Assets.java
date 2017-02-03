@@ -41,7 +41,8 @@ public class Assets {
 	//ATLAS
 	public static final AssetDescriptor<TextureAtlas> EXPLOSION_TEXTUREATLAS
 			= new AssetDescriptor<TextureAtlas>("Explosion/explosion.atlas", TextureAtlas.class);
-
+	public static final AssetDescriptor<TextureAtlas> DARALO_TEXTUREATLAS
+			= new AssetDescriptor<TextureAtlas>("atlasok/daralo.atlas", TextureAtlas.class);
 
 
 	//TEXTURE
@@ -64,7 +65,7 @@ public class Assets {
 		manager.load(TEST_TEXTURE);
 
 		manager.load(EXPLOSION_TEXTUREATLAS);
-
+		manager.load(DARALO_TEXTUREATLAS);
 		manager.load(EXTREMEACTION);
 
 		manager.load(ACMEREGULAR_FONT);
