@@ -159,16 +159,15 @@ public class PlayStage extends MyStage {
             else if(ez == 5) t = Assets.manager.get(Assets.HUS5);
 
             Husok husok = new Husok(t);
-            husok.setPosition(vel(0,getViewport().getWorldWidth()-husok.getWidth()),getViewport().getWorldHeight());
+            husok.setPosition(vel(((ExtendViewport)getViewport()).getMaxWorldWidth(),((ExtendViewport)getViewport()).getMinWorldWidth()-husok.getWidth()),getViewport().getWorldHeight());
             addActor(husok);
             esodolgok.add(husok);
             husok.setSpeed(speed);
         }
         if(nonhusTime > 5){
             nonhusTime = 0;
-            NemHusok nemHusok = new NemHusok(Assets.manager.get(Assets.TEST_TEXTURE));
-            nemHusok.setRotation(30);
-            nemHusok.setPosition(vel(0,getViewport().getWorldWidth()-nemHusok.getWidth()),getViewport().getWorldHeight());
+            NemHusok nemHusok = new NemHusok(vel(0,1) == 0 ? Assets.manager.get(Assets.RONT1) : Assets.manager.get(Assets.RONT2));
+            nemHusok.setPosition(vel(((ExtendViewport)getViewport()).getMaxWorldWidth(),((ExtendViewport)getViewport()).getMinWorldWidth()-nemHusok.getWidth()),getViewport().getWorldHeight());
             addActor(nemHusok);
             esodolgok.add(nemHusok);
             nemHusok.setSpeed(speed+1);
@@ -182,8 +181,7 @@ public class PlayStage extends MyStage {
             else if(ez == 3) t = Assets.manager.get(Assets.GYILKOS3);
 
             DaraloGyilkos daraloGyilkos = new DaraloGyilkos(t);
-            daraloGyilkos.setRotation(30);
-            daraloGyilkos.setPosition(vel(0,getViewport().getWorldWidth()-daraloGyilkos.getWidth()),getViewport().getWorldHeight());
+            daraloGyilkos.setPosition(vel(((ExtendViewport)getViewport()).getMaxWorldWidth(),((ExtendViewport)getViewport()).getMinWorldWidth()-daraloGyilkos.getWidth()),getViewport().getWorldHeight());
             addActor(daraloGyilkos);
             esodolgok.add(daraloGyilkos);
             daraloGyilkos.setSpeed(speed+2);
@@ -199,10 +197,10 @@ public class PlayStage extends MyStage {
     }
 
     private void pozicionalas(){
-        if(kolbaszTolto.getX() >=0 && kolbaszTolto.getX()+kolbaszTolto.getWidth() <= ((ExtendViewport)getViewport()).getMinWorldWidth())
+        if(kolbaszTolto.getX() >=((ExtendViewport)getViewport()).getMaxWorldWidth() && kolbaszTolto.getX()+kolbaszTolto.getWidth() <= ((ExtendViewport)getViewport()).getMinWorldWidth())
             kolbaszTolto.setPosition(kolbaszTolto.getX()-(Gdx.input.getAccelerometerX()*2), kolbaszTolto.getY());
-        if(kolbaszTolto.getX() < 0)
-            kolbaszTolto.setPosition(0, kolbaszTolto.getY());
+        if(kolbaszTolto.getX() < ((ExtendViewport)getViewport()).getMaxWorldWidth())
+            kolbaszTolto.setPosition(((ExtendViewport)getViewport()).getMaxWorldWidth(), kolbaszTolto.getY());
         if(kolbaszTolto.getX() + kolbaszTolto.getWidth() > ((ExtendViewport)getViewport()).getMinWorldWidth())
             kolbaszTolto.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth() - kolbaszTolto.getWidth(), kolbaszTolto.getY());
     }
