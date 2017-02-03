@@ -41,6 +41,8 @@ public class Assets {
 			= new AssetDescriptor<Texture>("Menu/nosound.png", Texture.class);
 	public static final AssetDescriptor<Music> GRINDING
 			= new AssetDescriptor<Music>("Music/grinding_meat.mp3", Music.class);
+	public static final AssetDescriptor<Music> PAPRIKAHANG
+			= new AssetDescriptor<Music>("Music/paprikahang.mp3", Music.class);
 
 
 
@@ -173,6 +175,7 @@ public class Assets {
 		manager.load(PALINKAPOHAR);
 
 		manager.load(PAPRIKA);
+		manager.load(PAPRIKAHANG);
 	}
 
     public static void afterLoaded() {

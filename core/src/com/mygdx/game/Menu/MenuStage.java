@@ -82,7 +82,7 @@ public class MenuStage extends MyStage {
 
         musicButton.setSize(128,128);
 
-        musicButton.setPosition(((ExtendViewport)getViewport()).getMaxWorldWidth()-musicButton.getWidth()/2,((ExtendViewport)getViewport()).getMinWorldHeight()-musicButton.getHeight());
+        musicButton.setPosition(((ExtendViewport)getViewport()).getMaxWorldWidth(),((ExtendViewport)getViewport()).getMinWorldHeight()-musicButton.getHeight());
 
         addActor(musicButton);
 
@@ -97,14 +97,14 @@ public class MenuStage extends MyStage {
                 }
                 else{
                     playing = true;
-                    music.setVolume(1f);
+                    music.setVolume(0.6f);
                 }
                 musicOnOff();
             }
         });
     }
 
-    private void musicIsPlaying() {
+    public static void musicIsPlaying() {
         if(playing){
             if(!music.isPlaying()){
                 music.stop();
@@ -122,7 +122,7 @@ public class MenuStage extends MyStage {
 
     @Override
     public void dispose() {
-        music.dispose();
+        //music.dispose();
         super.dispose();
     }
 }

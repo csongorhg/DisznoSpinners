@@ -1,6 +1,7 @@
 package com.mygdx.game.End;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -12,10 +13,12 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.Menu.MenuScreen;
+import com.mygdx.game.Menu.MenuStage;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyLabel;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Play.PlayScreen;
 import com.mygdx.game.Play.PlayStage;
 
 /**
@@ -28,6 +31,8 @@ public class EndStage extends MyStage {
     private MyButton button;
     private float width, height;
 
+    private Preferences preferences;
+
 
     public EndStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -35,18 +40,22 @@ public class EndStage extends MyStage {
 
     @Override
     public void init() {
+        if(MenuStage.playing) MenuStage.music.play();
+        preferences = Gdx.app.getPreferences(PlayScreen.PREFS);
+
         width = ((ExtendViewport)getViewport()).getMinWorldWidth();
         height = ((ExtendViewport)getViewport()).getMinWorldHeight();
 
-        sz1 = new MyLabel("You have been collected", labelStyle());
+        sz1 = new MyLabel("Your score: "+PlayStage.összpont, labelStyle());
         addActor(sz1);
         sz1.setPosition(width/2-sz1.getWidth()/2, height*4/6);
 
-        sz2 = new MyLabel((PlayStage.darabHus == 0 ? 0 : (PlayStage.darabNemHus/PlayStage.darabHus*100))+"% of sausage.", labelStyle());
+        //sz2 = new MyLabel((PlayStage.darabHus == 0 ? 0 : (PlayStage.darabNemHus/PlayStage.darabHus*100))+"% of sausage.", labelStyle());
+        sz2 = new MyLabel("Sausage concentration: "+kerekit(PlayStage.koncentráció)+"%",labelStyle());
         addActor(sz2);
         sz2.setPosition(width/2-sz2.getWidth()/2, height*3/6);
 
-        hs = new MyLabel("Your best score: 100%", labelStyle());
+        hs = new MyLabel(preferences.getFloat("MAX",0f) > PlayStage.koncentráció ?"Best concentration: "+kerekit(preferences.getFloat("MAX"))+" % ": "NEW BEST CONCENTRATION", labelStyle());
         addActor(hs);
         hs.setPosition(width/2-hs.getWidth()/2, height*2/6);
 
@@ -62,9 +71,17 @@ public class EndStage extends MyStage {
         });
     }
 
+    float kerekit(float f ){
+        f *= 100;
+        int x = (int)f;
+        f = (float)(x/100.0f);
+        return f;
+    }
+
     @Override
     public void act(float delta) {
         super.act(delta);
+        MenuStage.musicIsPlaying();
     }
 
     @Override
@@ -85,7 +102,7 @@ public class EndStage extends MyStage {
 
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Font/acmeregular.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter meret = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        meret.size = 70;
+        meret.size = 60;
         meret.characters = Assets.CHARS;
         BitmapFont font = generator.generateFont(meret);
         generator.dispose();

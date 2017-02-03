@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.End.EndScreen;
 import com.mygdx.game.GlobalClasses.Assets;
+import com.mygdx.game.Menu.MenuStage;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
@@ -20,10 +21,8 @@ import java.util.ArrayList;
  * Created by tuskeb on 2016. 09. 30..
  */
 public class PlayStage extends MyStage {
-    private TextButton textButton;
 
     private KolbaszTolto kolbaszTolto;
-    private Husok husok;
     private float husTime = 0, gyilkosTime = 0, nonhusTime = 0, palinkaTime = 0;
 
     private float elapsedTime;
@@ -31,16 +30,19 @@ public class PlayStage extends MyStage {
 
     private Preferences preferences;
 
-    public static int darabHus = 0;
-    public static int darabNemHus = 0;
-    private static int dbPotyogas;
-
+    private int darabHus = 0;
+    private int darabNemHus = 0;
+    public static int összpont = 0;
+    public static float koncentráció = 0f;
     public static float hurkaIdozito;
+    private int szivek = 4;
     public static float palinkaIdozito;
     public static float tuzIdozito;
 
     private HusdaraloSound husdaraloSound;
+    private PaprikaSound paprikaSound;
 
+    private OneSpriteStaticActor disznocsont,diszno1,diszno2,diszno3,diszno4;
     private static ArrayList<OneSpriteStaticActor> esodolgok;
     private static OneSpriteStaticActor palinkaKijelzoActor, palinkasPohar;
     public static int palinkaSzint, jelenlegiPalinkaSzint;
@@ -55,6 +57,9 @@ public class PlayStage extends MyStage {
 
     public void init() {
         addBackEventStackListener();
+
+        if(MenuStage.playing) MenuStage.music.play();
+
         preferences = Gdx.app.getPreferences(PlayScreen.PREFS);
 
 
@@ -77,13 +82,45 @@ public class PlayStage extends MyStage {
         //pálinka
 
         husdaraloSound = new HusdaraloSound();
+        paprikaSound = new PaprikaSound();
 
         kolbaszTolto = new KolbaszTolto();
         addActor(kolbaszTolto);
 
+        disznofel();
         palinkaszint();
 
         }
+
+    private void disznofel(){
+        float meret = ((ExtendViewport)getViewport()).getMinWorldWidth()/8;
+        diszno4 = new OneSpriteStaticActor(Assets.manager.get(Assets.DISZNODARAB4));
+        diszno4.setSize(meret*4,meret*2);
+        diszno4.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth()/2,((ExtendViewport)getViewport()).getMinWorldHeight()-diszno4.getHeight());
+
+        diszno3 = new OneSpriteStaticActor(Assets.manager.get(Assets.DISZNODARAB3));
+        diszno3.setSize(meret*4,meret*2);
+        diszno3.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth()/2,((ExtendViewport)getViewport()).getMinWorldHeight()-diszno3.getHeight());
+
+        diszno2 = new OneSpriteStaticActor(Assets.manager.get(Assets.DISZNODARAB2));
+        diszno2.setSize(meret*4,meret*2);
+        diszno2.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth()/2,((ExtendViewport)getViewport()).getMinWorldHeight()-diszno2.getHeight());
+
+        diszno1 = new OneSpriteStaticActor(Assets.manager.get(Assets.DISZNODARAB1));
+        diszno1.setSize(meret*4,meret*2);
+        diszno1.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth()/2,((ExtendViewport)getViewport()).getMinWorldHeight()-diszno1.getHeight());
+
+        disznocsont = new OneSpriteStaticActor(Assets.manager.get(Assets.DISZNOCSONTVAZ));
+        disznocsont.setSize(meret*4,meret*2);
+        disznocsont.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth()/2,((ExtendViewport)getViewport()).getMinWorldHeight()-disznocsont.getHeight());
+
+        addActor(disznocsont);
+        addActor(diszno4);
+        addActor(diszno3);
+        addActor(diszno2);
+        addActor(diszno1);
+
+    }
 
     @Override
     public void act(float delta) {
@@ -98,6 +135,8 @@ public class PlayStage extends MyStage {
         palinkaIdozito += delta;
 
         kolbaszTolto.act(delta);
+
+        MenuStage.musicIsPlaying();
 
         pozicionalas();
         esik();
@@ -114,6 +153,14 @@ public class PlayStage extends MyStage {
 
 
         if (palinkaSzint == 0) {
+            összpont = darabHus + darabNemHus;
+            koncentráció = (darabHus *1.0f / összpont *1.0f) * 100.0f;
+            System.out.println(koncentráció);
+            if(koncentráció > preferences.getFloat("MAX"))
+                preferences.putFloat("MAX",koncentráció);
+            preferences.flush();
+            husdaraloSound.stop();
+            paprikaSound.stop();
             dispose();
             game.setScreen(new EndScreen(game));
         }
@@ -141,6 +188,7 @@ public class PlayStage extends MyStage {
         }
         if (tuzIdozito <= 0.0f && tuz != null) {
             tuz.remove();
+            paprikaSound.stop();
         }
         //tüz
 
@@ -168,6 +216,7 @@ public class PlayStage extends MyStage {
                         darabNemHus++;
                     }else if( a instanceof DaraloGyilkos){
                         hurkaIdozito += 1.0f;
+                        minuszelet();
                     }else if (a instanceof Palinka) {
                         if ( (palinkaSzint+1) <= 15 ) {
                             palinkaSzint++;
@@ -180,7 +229,8 @@ public class PlayStage extends MyStage {
                         tuz.setLooping(true);
                         tuz.setY(kolbaszTolto.getY() + kolbaszTolto.getHeight());
                         addActor(tuz);
-                        tuzIdozito = 1;
+                        tuzIdozito = 3.5f;
+                        paprikaSound.start();
                     }
 
                     a.remove();
@@ -191,6 +241,38 @@ public class PlayStage extends MyStage {
 
 
         }
+    }
+
+    private void minuszelet(){
+        if(szivek == 4){
+            szivek--;
+            diszno4.remove();
+        }
+        else if(szivek == 3){
+            szivek--;
+            diszno3.remove();
+        }
+        else if(szivek == 2){
+            szivek--;
+            diszno2.remove();
+        }
+        else if(szivek == 1){
+            szivek--;
+            diszno1.remove();
+        }
+        else if(szivek == 0){
+            összpont = darabHus + darabNemHus;
+            koncentráció = (darabHus *1.0f / összpont *1.0f) * 100.0f;
+            System.out.println(koncentráció);
+            if(koncentráció > preferences.getFloat("MAX"))
+                preferences.putFloat("MAX",koncentráció);
+            preferences.flush();
+            husdaraloSound.stop();
+            paprikaSound.stop();
+            dispose();
+            game.setScreen(new EndScreen(game));
+        }
+
     }
 
     private void palinkaszint() {

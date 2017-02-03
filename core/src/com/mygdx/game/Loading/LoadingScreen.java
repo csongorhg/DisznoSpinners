@@ -2,6 +2,7 @@ package com.mygdx.game.Loading;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.mygdx.game.End.EndScreen;
 import com.mygdx.game.Menu.MenuScreen;
 import com.mygdx.game.Menu.MenuStage;
@@ -20,13 +21,13 @@ public class LoadingScreen extends MyScreen {
 	private Stage stage;
 	private OneSpriteStaticActor text;
 	private float elapsedTime = 0;
-	private OneSpriteAnimatedActor picture;
+	private OneSpriteStaticActor picture;
 
     public LoadingScreen(MyGdxGame game) {
 		super(game);
 		Gdx.input.setCatchBackKey(true);
 		stage = new Stage();
-		picture = new OneSpriteAnimatedActor("Menu/load.txt")
+		/*picture = new OneSpriteAnimatedActor("Menu/load.txt")
 		{
 			@Override
 			public void init() {
@@ -39,14 +40,16 @@ public class LoadingScreen extends MyScreen {
 				super.act(delta);
 				setRotation(360-elapsedTime*100);
 			}
-		};
+		};*/
+		//stage.addActor(picture);
+
+		picture = new OneSpriteStaticActor("Diszno/csontvaz.png");
+		picture.setSize(stage.getWidth()/2,stage.getWidth()/2);
+		picture.setPosition(stage.getViewport().getWorldWidth()/2 - picture.getWidth()/2,stage.getHeight()/2 - picture.getHeight());
 		stage.addActor(picture);
-
-		picture.setPosition(stage.getViewport().getWorldWidth()/2- picture.getWidth()/2,stage.getHeight()/2- picture.getHeight()/2);
-
 		text = new OneSpriteStaticActor("Menu/justszoveg.png");
 		stage.addActor(text);
-		text.setPosition(stage.getViewport().getWorldWidth()/2-text.getWidth()/2,stage.getHeight()/2-text.getHeight()/2);
+		text.setPosition(stage.getViewport().getWorldWidth()/2-text.getWidth()/2,stage.getHeight()-text.getHeight());
     }
 
 
@@ -62,7 +65,32 @@ public class LoadingScreen extends MyScreen {
 		stage.act(delta);
 		stage.draw();
 
-		if (elapsedTime > 4.0 && Assets.manager.update()) {
+		if((int)(Assets.manager.getProgress()*100f) >= 25){
+			picture = new OneSpriteStaticActor("Diszno/diszno-1.png");
+			picture.setSize(stage.getWidth()/2,stage.getWidth()/2);
+			picture.setPosition(stage.getViewport().getWorldWidth()/2 - picture.getWidth()/2,stage.getHeight()/2 - picture.getHeight());
+			stage.addActor(picture);
+		}
+		if((int)(Assets.manager.getProgress()*100f) >= 50){
+			picture = new OneSpriteStaticActor("Diszno/diszno-2.png");
+			picture.setSize(stage.getWidth()/2,stage.getWidth()/2);
+			picture.setPosition(stage.getViewport().getWorldWidth()/2 - picture.getWidth()/2,stage.getHeight()/2 - picture.getHeight());
+			stage.addActor(picture);
+		}
+		if((int)(Assets.manager.getProgress()*100f) >= 75){
+			picture = new OneSpriteStaticActor("Diszno/diszno-3.png");
+			picture.setSize(stage.getWidth()/2,stage.getWidth()/2);
+			picture.setPosition(stage.getViewport().getWorldWidth()/2 - picture.getWidth()/2,stage.getHeight()/2 - picture.getHeight());
+			stage.addActor(picture);
+		}
+		if((int)(Assets.manager.getProgress()*100f) >= 90){
+			picture = new OneSpriteStaticActor("Diszno/diszno-4.png");
+			picture.setSize(stage.getWidth()/2,stage.getWidth()/2);
+			picture.setPosition(stage.getViewport().getWorldWidth()/2 - picture.getWidth()/2,stage.getHeight()/2 - picture.getHeight());
+			stage.addActor(picture);
+		}
+
+		if (elapsedTime > 2.0 && Assets.manager.update()) {
 			Assets.afterLoaded();
 			MenuStage.music = Assets.manager.get(Assets.MUSIC);
 			MenuStage.playing = true;
