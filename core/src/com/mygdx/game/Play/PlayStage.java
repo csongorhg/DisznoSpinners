@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.End.EndScreen;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
@@ -23,7 +24,7 @@ public class PlayStage extends MyStage {
 
     private KolbaszTolto kolbaszTolto;
     private Husok husok;
-    private float husTime = 0, gyilkosTime = 0, nonhusTime = 0;
+    private float husTime = 0, gyilkosTime = 0, nonhusTime = 0, palinkaTime = 0;
 
     private float elapsedTime;
     private int speed = 1;
@@ -33,11 +34,14 @@ public class PlayStage extends MyStage {
     public static int darabHus = 0;
     public static int darabNemHus = 0;
     private static int dbPotyogas;
+
     public static float hurkaIdozito;
+    public static float palinkaIdozito;
 
     private static ArrayList<OneSpriteStaticActor> esodolgok;
-    private static OneSpriteStaticActor palinkaKijelzoActor;
+    private static OneSpriteStaticActor palinkaKijelzoActor, palinkasPohar;
     public static int palinkaSzint, jelenlegiPalinkaSzint;
+
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
         super(viewport, batch, game);
@@ -48,14 +52,18 @@ public class PlayStage extends MyStage {
         addBackEventStackListener();
         preferences = Gdx.app.getPreferences(PlayScreen.PREFS);
 
+
+
         esodolgok = new ArrayList<OneSpriteStaticActor>();
+
+
 
         //pálinka
         palinkaSzint = 15;
         palinkaKijelzoActor = new OneSpriteStaticActor(new PalinkaKijelzo().getTexture());
-        addActor(palinkaKijelzoActor);
         palinkaKijelzoActor.setSize(50,200);
-        palinkaKijelzoActor.setPosition(getViewport().getWorldWidth() - palinkaKijelzoActor.getWidth(),0);
+        palinkaKijelzoActor.setPosition(0 , getViewport().getWorldHeight() - palinkaKijelzoActor.getHeight());
+        addActor(palinkaKijelzoActor);
         jelenlegiPalinkaSzint = palinkaSzint;
         //pálinka
 
@@ -64,19 +72,21 @@ public class PlayStage extends MyStage {
         kolbaszTolto = new KolbaszTolto();
         addActor(kolbaszTolto);
 
-        //potyogoDolgok.add(husok);
-
         palinkaszint();
 
         }
 
     @Override
     public void act(float delta) {
+
         super.act(delta);
         elapsedTime += delta;
         husTime += delta;
         nonhusTime += delta;
         gyilkosTime += delta;
+        palinkaTime += delta;
+        palinkaIdozito += delta;
+
         kolbaszTolto.act(delta);
 
         pozicionalas();
@@ -84,9 +94,19 @@ public class PlayStage extends MyStage {
         utkozik();
 
 
-        //pálinkaszint váltása
-        palinkaSzint--;
-        palinkaszint();
+        //pálinkaszint váltása - 10mp ként 1 fogy
+        if (palinkaIdozito >= 1) {
+            palinkaSzint--;
+            palinkaIdozito = 0;
+            palinkaszint();
+
+        }
+
+
+        if (palinkaSzint == 0) {
+            dispose();
+            game.setScreen(new EndScreen(game));
+        }
         //pálinkaszint váltása
 
         if (hurkaIdozito > 0.0f) {
@@ -112,7 +132,9 @@ public class PlayStage extends MyStage {
                 i--;
             }else{
                 //itt kapok el valamit
-                if(kolbaszTolto.getY()+kolbaszTolto.getHeight() > a.getY() && a.getX()+a.getWidth()/2 > kolbaszTolto.getX() && a.getX()-a.getWidth()/2 < kolbaszTolto.getX()+kolbaszTolto.getWidth()){
+                if(kolbaszTolto.getY()+kolbaszTolto.getHeight() > a.getY() &&
+                        a.getX()+a.getWidth()/2 > kolbaszTolto.getX() &&
+                        a.getX()-a.getWidth()/2 < kolbaszTolto.getX()+kolbaszTolto.getWidth()){
                     if(a instanceof Husok){
                         hurkaIdozito += 1.0f;
                         darabHus++;
@@ -121,6 +143,11 @@ public class PlayStage extends MyStage {
                         darabNemHus++;
                     }else if( a instanceof DaraloGyilkos){
                         hurkaIdozito += 1.0f;
+                    }else if (a instanceof Palinka) {
+                        if ( (palinkaSzint+1) <= 15 ) {
+                            palinkaSzint++;
+                            palinkaszint();
+                        }
                     }
 
                     a.remove();
@@ -139,7 +166,7 @@ public class PlayStage extends MyStage {
             palinkaKijelzoActor = new OneSpriteStaticActor(new PalinkaKijelzo().getTexture());
             addActor(palinkaKijelzoActor);
             palinkaKijelzoActor.setSize(50,200);
-            palinkaKijelzoActor.setPosition(getViewport().getWorldWidth() - palinkaKijelzoActor.getWidth(),0);
+            palinkaKijelzoActor.setPosition(0 , getViewport().getWorldHeight() - palinkaKijelzoActor.getHeight());
             jelenlegiPalinkaSzint = palinkaSzint;
             }
         }
@@ -185,6 +212,14 @@ public class PlayStage extends MyStage {
             addActor(daraloGyilkos);
             esodolgok.add(daraloGyilkos);
             daraloGyilkos.setSpeed(speed+2);
+        }
+        if (palinkaTime > 5) {
+            palinkaTime = 0;
+            Palinka palinka = new Palinka(Assets.manager.get(Assets.PALINKA));
+            palinka.setPosition(vel(((ExtendViewport) getViewport()).getMaxWorldWidth(), ((ExtendViewport) getViewport()).getMinWorldWidth() - palinka.getWidth()), getViewport().getWorldHeight());
+            addActor(palinka);
+            esodolgok.add(palinka);
+            palinka.setSpeed(speed + 1);
         }
     }
 
