@@ -61,6 +61,8 @@ public class Assets {
 			= new AssetDescriptor<Texture>("Menu/endhatter.png", Texture.class);
 	public static final AssetDescriptor<Texture> INGAMEGROUND
 			= new AssetDescriptor<Texture>("Menu/ingamehatter.png", Texture.class);
+	public static final AssetDescriptor<Texture> KERDOJEL
+			= new AssetDescriptor<Texture>("Menu/kerd.png", Texture.class);
 
 
 
@@ -148,6 +150,7 @@ public class Assets {
 		manager.load(ENDBACKGROUND);
 		manager.load(INGAMEGROUND);
 
+		manager.load(KERDOJEL);
 		manager.load(HUS1);
 		manager.load(HUS2);
 		manager.load(HUS3);
