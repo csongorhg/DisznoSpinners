@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
+import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
 
@@ -17,7 +18,7 @@ import com.mygdx.game.MyGdxGame;
 public class PlayStage extends MyStage {
     private TextButton textButton;
 
-    OneSpriteStaticActor oneSpriteStaticActor;
+    private KolbaszTolto kolbaszTolto;
 
 
     public PlayStage(Viewport viewport, Batch batch, MyGdxGame game) {
@@ -29,10 +30,8 @@ public class PlayStage extends MyStage {
     public void init() {
         addBackEventStackListener();
 
-        oneSpriteStaticActor = new OneSpriteStaticActor(Assets.manager.get(Assets.TEST_TEXTURE));
-        oneSpriteStaticActor.setPosition(getViewport().getWorldWidth() / 2 - oneSpriteStaticActor.getWidth() / 2,
-                0);
-        addActor(oneSpriteStaticActor);
+        kolbaszTolto = new KolbaszTolto();
+        addActor(kolbaszTolto);
     }
 
     @Override
