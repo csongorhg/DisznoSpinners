@@ -8,7 +8,21 @@ import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
  */
 public class Husok extends OneSpriteStaticActor {
 
+    private int speed = 1;
+
     public Husok(Texture texture) {
         super(texture);
+        setSize(100,100);
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        setPosition(getX(), getY()-2*speed);
+
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 }

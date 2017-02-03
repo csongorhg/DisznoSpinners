@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.MyStage;
+import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
 
@@ -17,6 +18,12 @@ public class PlayStage extends MyStage {
     private TextButton textButton;
 
     private KolbaszTolto kolbaszTolto;
+    private Husok husok;
+    private float husTime = 0, gyilkosTime = 0, nonhusTime = 0;
+
+    private float elapsedTime;
+    private int speed = 1;
+    private static ArrayList<OneSpriteStaticActor> potyogoDolgok;
 
     private static int dbPotyogas;
 
@@ -47,6 +54,9 @@ public class PlayStage extends MyStage {
         kolbaszTolto = new KolbaszTolto();
         addActor(kolbaszTolto);
 
+        //potyogoDolgok.add(husok);
+
+    }
         Husok husok = new Husok(Assets.manager.get(Assets.TEST_TEXTURE));
         addActor(husok);
 
@@ -57,7 +67,13 @@ public class PlayStage extends MyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
+        elapsedTime += delta;
+        husTime += delta;
+        nonhusTime += delta;
+        gyilkosTime += delta;
+
         pozicionalas();
+        esik();
 
         //pálinkaszint váltása
         palinkaSzint--;
@@ -77,10 +93,43 @@ public class PlayStage extends MyStage {
             jelenlegiPalinkaSzint = palinkaSzint;
             }
         }
+    private void esik(){
+        if(elapsedTime > 10){
+            elapsedTime = 0;
+            speed++;
+        }
+        if(husTime > 2){
+            husTime = 0;
+            Husok husok = new Husok(Assets.manager.get(Assets.TEST_TEXTURE));
+            husok.setPosition(vel(0,getViewport().getWorldWidth()-husok.getWidth()),getViewport().getWorldHeight());
+            addActor(husok);
+            husok.setSpeed(speed);
+        }
+        if(nonhusTime > 5){
+            nonhusTime = 0;
+            NemHusok nemHusok = new NemHusok(Assets.manager.get(Assets.TEST_TEXTURE));
+            nemHusok.setRotation(30);
+            nemHusok.setPosition(vel(0,getViewport().getWorldWidth()-nemHusok.getWidth()),getViewport().getWorldHeight());
+            addActor(nemHusok);
+            nemHusok.setSpeed(speed+1);
+        }
+        if(gyilkosTime > 11){
+            gyilkosTime = 0;
+            DaraloGyilkos daraloGyilkos = new DaraloGyilkos(Assets.manager.get(Assets.TEST_TEXTURE));
+            daraloGyilkos.setRotation(45);
+            daraloGyilkos.setPosition(vel(0,getViewport().getWorldWidth()-daraloGyilkos.getWidth()),getViewport().getWorldHeight());
+            addActor(daraloGyilkos);
+            daraloGyilkos.setSpeed(speed+2);
+        }
+    }
+
+    private float vel(float a, float b){
+        return (float)(Math.random()*(b-a+1)+a);
+    }
 
     private void pozicionalas(){
         if(kolbaszTolto.getX() >=0 && kolbaszTolto.getX()+kolbaszTolto.getWidth() <= ((ExtendViewport)getViewport()).getMinWorldWidth())
-            kolbaszTolto.setPosition(kolbaszTolto.getX()-(Gdx.input.getAccelerometerX()), kolbaszTolto.getY());
+            kolbaszTolto.setPosition(kolbaszTolto.getX()-(Gdx.input.getAccelerometerX()*2), kolbaszTolto.getY());
         if(kolbaszTolto.getX() < 0)
             kolbaszTolto.setPosition(0, kolbaszTolto.getY());
         if(kolbaszTolto.getX() + kolbaszTolto.getWidth() > ((ExtendViewport)getViewport()).getMinWorldWidth())
