@@ -39,6 +39,8 @@ public class Assets {
 			= new AssetDescriptor<Texture>("Menu/sound.png", Texture.class);
 	public static final AssetDescriptor<Texture> NOSOUND
 			= new AssetDescriptor<Texture>("Menu/nosound.png", Texture.class);
+	public static final AssetDescriptor<Music> GRINDING
+			= new AssetDescriptor<Music>("Music/grinding_meat.mp3", Music.class);
 
 
 
@@ -120,6 +122,7 @@ public class Assets {
 		manager.load(MUSIC);
 		manager.load(SOUND);
 		manager.load(NOSOUND);
+		manager.load(GRINDING);
 
 		manager.load(ACMEREGULAR_FONT);
 

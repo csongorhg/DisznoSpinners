@@ -35,6 +35,8 @@ public class PlayStage extends MyStage {
     private static int dbPotyogas;
     public static float hurkaIdozito;
 
+    private HusdaraloSound husdaraloSound;
+
     private static ArrayList<OneSpriteStaticActor> esodolgok;
     private static OneSpriteStaticActor palinkaKijelzoActor;
     public static int palinkaSzint, jelenlegiPalinkaSzint;
@@ -59,7 +61,7 @@ public class PlayStage extends MyStage {
         jelenlegiPalinkaSzint = palinkaSzint;
         //pálinka
 
-
+        husdaraloSound = new HusdaraloSound();
 
         kolbaszTolto = new KolbaszTolto();
         addActor(kolbaszTolto);
@@ -91,6 +93,7 @@ public class PlayStage extends MyStage {
 
         if (hurkaIdozito > 0.0f) {
             kolbaszTolto.setFps(30);
+            husdaraloSound.start();
         }
         if(hurkaIdozito > 0.0f)
             hurkaIdozito -= delta;
@@ -98,6 +101,7 @@ public class PlayStage extends MyStage {
         if (hurkaIdozito <= 0.0f) {
             hurkaIdozito = 0.0f;
             kolbaszTolto.setFps(4);
+            husdaraloSound.stop();
         }
 
     }
