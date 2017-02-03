@@ -1,6 +1,7 @@
 package com.mygdx.game.Play;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -27,6 +28,8 @@ public class PlayStage extends MyStage {
     private float elapsedTime;
     private int speed = 1;
 
+    private Preferences preferences;
+
     public static int darabHus = 0;
     public static int darabNemHus = 0;
     private static int dbPotyogas;
@@ -42,6 +45,7 @@ public class PlayStage extends MyStage {
 
     public void init() {
         addBackEventStackListener();
+        preferences = Gdx.app.getPreferences(PlayScreen.PREFS);
 
         esodolgok = new ArrayList<OneSpriteStaticActor>();
 

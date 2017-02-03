@@ -1,6 +1,7 @@
 package com.mygdx.game.Play;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.mygdx.game.MyBaseClasses.MyScreen;
@@ -11,6 +12,9 @@ import com.mygdx.game.MyGdxGame;
  */
 public class PlayScreen extends MyScreen {
     protected PlayStage playStage;
+    public static final String PREFS = "MAX";
+
+    private Preferences preferences = Gdx.app.getPreferences(PREFS);
 
     public PlayScreen(MyGdxGame game) {
         super(game);
@@ -36,6 +40,13 @@ public class PlayScreen extends MyScreen {
     @Override
     public void dispose() {
         super.dispose();
+        preferences.flush();
         playStage.dispose();
+    }
+
+    @Override
+    public void hide() {
+        super.hide();
+        preferences.flush();
     }
 }
