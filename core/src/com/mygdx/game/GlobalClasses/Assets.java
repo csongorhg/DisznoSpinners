@@ -99,6 +99,11 @@ public class Assets {
 	public static final AssetDescriptor<Texture> DISZNODARAB4
 			= new AssetDescriptor<Texture>("Diszno/diszno-4.png", Texture.class);
 
+	public static final AssetDescriptor<Texture> PALINKA
+			= new AssetDescriptor<Texture>("TestImg/palinka.png", Texture.class);
+	public static final AssetDescriptor<Texture> PALINKAPOHAR
+			= new AssetDescriptor<Texture>("TestImg/palinaspohar.png", Texture.class);
+
 
 
 
@@ -144,6 +149,9 @@ public class Assets {
 		manager.load(DISZNODARAB2);
 		manager.load(DISZNODARAB3);
 		manager.load(DISZNODARAB4);
+
+		manager.load(PALINKA);
+		manager.load(PALINKAPOHAR);
 	}
 
     public static void afterLoaded() {
