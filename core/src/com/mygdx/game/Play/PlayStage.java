@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
@@ -28,13 +29,18 @@ public class PlayStage extends MyStage {
     public void init() {
         addBackEventStackListener();
 
-        //oneSpriteStaticActor = new OneSpriteStaticActor(Assets.manager.get(Assets.));
+        oneSpriteStaticActor = new OneSpriteStaticActor(Assets.manager.get(Assets.TEST_TEXTURE));
+        oneSpriteStaticActor.setPosition(getViewport().getWorldWidth() / 2 - oneSpriteStaticActor.getWidth() / 2,
+                0);
+        addActor(oneSpriteStaticActor);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
     }
+
+
 
     @Override
     public void dispose() {

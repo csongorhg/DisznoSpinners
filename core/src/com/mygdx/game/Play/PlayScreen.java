@@ -29,7 +29,7 @@ public class PlayScreen extends MyScreen {
         r = 1;
         g = 0.5f;
         b = 0.3f;
-        playStage = new PlayStage(new ExtendViewport(1280,720,new OrthographicCamera(1280,720)), spriteBatch, game);
+        playStage = new PlayStage(new ExtendViewport(720,1280,new OrthographicCamera(720,1280)), spriteBatch, game);
         Gdx.input.setInputProcessor(playStage);
     }
 
