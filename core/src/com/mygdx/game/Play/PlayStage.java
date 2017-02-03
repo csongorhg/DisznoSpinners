@@ -23,7 +23,6 @@ public class PlayStage extends MyStage {
 
     private float elapsedTime;
     private int speed = 1;
-    private static ArrayList<OneSpriteStaticActor> potyogoDolgok;
 
     private static int dbPotyogas;
 
@@ -56,8 +55,8 @@ public class PlayStage extends MyStage {
 
         //potyogoDolgok.add(husok);
 
-    }
-        Husok husok = new Husok(Assets.manager.get(Assets.TEST_TEXTURE));
+
+        husok = new Husok(Assets.manager.get(Assets.TEST_TEXTURE));
         addActor(husok);
 
         palinkaszint();
