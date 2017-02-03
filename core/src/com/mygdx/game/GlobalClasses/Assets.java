@@ -50,6 +50,12 @@ public class Assets {
 			= new AssetDescriptor<TextureAtlas>("atlasok/daralo.atlas", TextureAtlas.class);
 
 
+	//BACKGROUND
+	public static final AssetDescriptor<Texture> BACKGROUND
+			= new AssetDescriptor<Texture>("Menu/hatter.png", Texture.class);
+
+
+
 	//TEXTURE
 	public static final AssetDescriptor<Texture> TEST_TEXTURE
 			= new AssetDescriptor<Texture>("TestImg/ratyitutu.png", Texture.class);
@@ -95,6 +101,8 @@ public class Assets {
 		manager.load(NOSOUND);
 
 		manager.load(ACMEREGULAR_FONT);
+
+		manager.load(BACKGROUND);
 
 		manager.load(HUS1);
 		manager.load(HUS2);
