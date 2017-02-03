@@ -1,5 +1,6 @@
 package com.mygdx.game.Play;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
@@ -20,6 +21,7 @@ public class KolbaszTolto extends OneSpriteAnimatedActor {
     @Override
     public void act(float delta) {
         super.act(delta);
+
     }
 
 }
