@@ -39,7 +39,7 @@ public class MenuScreen extends MyScreen {
 
     @Override
     public void init() {
-        menuStage  = new MenuStage(new ExtendViewport(1280,720,new OrthographicCamera(1280,720)), spriteBatch, game);
+        menuStage  = new MenuStage(new ExtendViewport(720,1280,new OrthographicCamera(720,1280)), spriteBatch, game);
         Gdx.input.setInputProcessor(menuStage);
     }
 }

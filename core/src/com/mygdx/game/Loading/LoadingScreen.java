@@ -1,13 +1,17 @@
 package com.mygdx.game.Loading;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.Menu.MenuScreen;
+import com.mygdx.game.Menu.MenuStage;
 import com.mygdx.game.MyBaseClasses.MyScreen;
 import com.mygdx.game.GlobalClasses.*;
 import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.Play.PlayStage;
 
+//Music: http://www.bensound.com
 
 public class LoadingScreen extends MyScreen {
 
@@ -19,6 +23,7 @@ public class LoadingScreen extends MyScreen {
 
     public LoadingScreen(MyGdxGame game) {
 		super(game);
+		Gdx.input.setCatchBackKey(true);
 		stage = new Stage();
 		picture = new OneSpriteAnimatedActor("Menu/load.txt")
 		{
@@ -58,6 +63,10 @@ public class LoadingScreen extends MyScreen {
 
 		if (elapsedTime > 4.0 && Assets.manager.update()) {
 			Assets.afterLoaded();
+			MenuStage.music = Assets.manager.get(Assets.MUSIC);
+			MenuStage.playing = true;
+			MenuStage.music.play();
+			MenuStage.music.setVolume(0.9999f);
 			game.setScreen(new MenuScreen(game));
 		}
 

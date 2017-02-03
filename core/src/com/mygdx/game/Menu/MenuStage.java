@@ -1,12 +1,16 @@
 package com.mygdx.game.Menu;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.GlobalClasses.Assets;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
+import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.Play.PlayScreen;
 import com.mygdx.game.MyGdxGame;
 
@@ -17,6 +21,9 @@ public class MenuStage extends MyStage {
 
     private TextButton textButton, textButton2, textButton3;
     private TextButton.TextButtonStyle textButtonStyle;
+    private OneSpriteStaticActor musicButton;
+    public static Music music;
+    public static boolean playing;
 
     //Gdx.input.getAccelerometerX() / 2
 
@@ -38,11 +45,13 @@ public class MenuStage extends MyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreen(new PlayScreen(game));
+                game.dispose();
+                dispose();
+                System.exit(0);
             }
         });
         textButton3.setPosition(getViewport().getWorldWidth() / 2 - textButton3.getWidth() / 2,
-                textButton3.getHeight());
+                ((ExtendViewport)getViewport()).getMinWorldHeight() / 2-textButton3.getHeight());
         addActor(textButton3);
 
 
@@ -58,11 +67,10 @@ public class MenuStage extends MyStage {
         });
 
         textButton2.setPosition(getViewport().getWorldWidth() / 2 - textButton2.getWidth() / 2,
-                textButton3.getX() + textButton3.getHeight());
+                ((ExtendViewport)getViewport()).getMinWorldHeight() / 2 + textButton2.getHeight());
         addActor(textButton2);
 
-
-
+        musicOnOff();
 
 
 
@@ -71,14 +79,55 @@ public class MenuStage extends MyStage {
 
     }
 
+    private void musicOnOff(){
+        System.out.println(1);
+
+        musicButton = new OneSpriteStaticActor( music.getVolume() >= 0.9f ?
+                Assets.manager.get(Assets.SOUND) : Assets.manager.get(Assets.NOSOUND));
+
+        musicButton.setSize(128,128);
+
+        musicButton.setPosition(0,((ExtendViewport)getViewport()).getMinWorldHeight()-musicButton.getHeight());
+
+        addActor(musicButton);
+
+        musicButton.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                musicButton.remove();
+                if(music.getVolume()>0.9f){
+                    playing = false;
+                    music.setVolume(0f);
+                }
+                else{
+                    playing = true;
+                    music.setVolume(1f);
+                }
+                musicOnOff();
+            }
+        });
+    }
+
+    private void musicIsPlaying() {
+        if(playing){
+            if(!music.isPlaying()){
+                music.stop();
+                music.play();
+            }
+        }
+    }
 
     @Override
     public void act(float delta) {
         super.act(delta);
+
+        musicIsPlaying();
     }
 
     @Override
     public void dispose() {
+        music.dispose();
         super.dispose();
     }
 }

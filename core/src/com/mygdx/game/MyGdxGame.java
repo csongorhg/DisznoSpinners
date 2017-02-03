@@ -126,6 +126,13 @@ public class MyGdxGame extends Game {
 		if (prevScreen!=null) {
 			if (pushToStack) {backButtonStack.push(prevScreen.getClass());}
 			prevScreen.dispose();
+			try {
+				prevScreen.dispose();
+			}
+			catch (Exception e){
+				e.printStackTrace();
+			}
+			prevScreen.dispose();
 		}
 		super.setScreen(screen);
 	}

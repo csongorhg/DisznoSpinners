@@ -33,8 +33,13 @@ public class Assets {
 
 
 	//MUSIC
-	public static final AssetDescriptor<Music> EXTREMEACTION
-			= new AssetDescriptor<Music>("Music/bensound-happyrock.mp3", Music.class);
+	public static final AssetDescriptor<Music> MUSIC
+			= new AssetDescriptor<Music>("Music/bensound-jazzcomedy.mp3", Music.class);
+	public static final AssetDescriptor<Texture> SOUND
+			= new AssetDescriptor<Texture>("Menu/sound.png", Texture.class);
+	public static final AssetDescriptor<Texture> NOSOUND
+			= new AssetDescriptor<Texture>("Menu/nosound.png", Texture.class);
+
 
 
 
@@ -68,7 +73,7 @@ public class Assets {
 
 
 
-    public static void prepare() {
+	public static void prepare() {
 		manager = new AssetManager();
 		Texture.setAssetManager(manager);
 	}
@@ -83,7 +88,11 @@ public class Assets {
 
 		manager.load(EXPLOSION_TEXTUREATLAS);
 		manager.load(DARALO_TEXTUREATLAS);
-		manager.load(EXTREMEACTION);
+
+
+		manager.load(MUSIC);
+		manager.load(SOUND);
+		manager.load(NOSOUND);
 
 		manager.load(ACMEREGULAR_FONT);
 
