@@ -63,7 +63,7 @@ public class Assets {
 	public static final AssetDescriptor<Texture> HUS1
 			= new AssetDescriptor<Texture>("hus/disznoresz1.png", Texture.class);
 	public static final AssetDescriptor<Texture> HUS2
-			= new AssetDescriptor<Texture>("hus/disznoresz2.png", Texture.class);
+			= new AssetDescriptor<Texture>("hus/disznores2.png", Texture.class);
 	public static final AssetDescriptor<Texture> HUS3
 			= new AssetDescriptor<Texture>("hus/disznoresz3.png", Texture.class);
 	public static final AssetDescriptor<Texture> HUS4
@@ -73,6 +73,15 @@ public class Assets {
 
 	public static final AssetDescriptor<Texture> GYILKOS1
 			= new AssetDescriptor<Texture>("gyilkos/csont.png", Texture.class);
+	public static final AssetDescriptor<Texture> GYILKOS2
+			= new AssetDescriptor<Texture>("gyilkos/kes.png", Texture.class);
+	public static final AssetDescriptor<Texture> GYILKOS3
+			= new AssetDescriptor<Texture>("gyilkos/protko.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> RONT1
+			= new AssetDescriptor<Texture>("ront/cipo.png", Texture.class);
+	public static final AssetDescriptor<Texture> RONT2
+			= new AssetDescriptor<Texture>("ront/gumicsizma.png", Texture.class);
 
 
 
