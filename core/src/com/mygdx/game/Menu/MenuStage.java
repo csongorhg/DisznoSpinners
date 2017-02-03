@@ -37,7 +37,19 @@ public class MenuStage extends MyStage {
 
         addBackEventStackListener();
 
-
+        //valami
+        textButton2 = new MyButton("Play", game.getTextButtonStyle());
+        textButton2.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new PlayScreen(game));
+            }
+        });
+        textButton2.setSize(textButton2.getWidth()*2,textButton2.getHeight());
+        textButton2.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth() / 2 - textButton2.getWidth() / 2,
+                ((ExtendViewport)getViewport()).getMinWorldHeight() / 2 + textButton2.getHeight()*0.8f);
+        addActor(textButton2);
 
         //quit
         textButton3 = new MyButton("Quit", game.getTextButtonStyle());
@@ -50,25 +62,10 @@ public class MenuStage extends MyStage {
                 System.exit(0);
             }
         });
+        textButton3.setSize(textButton2.getWidth(),textButton2.getHeight());
         textButton3.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth() / 2 - textButton3.getWidth() / 2,
-                ((ExtendViewport)getViewport()).getMinWorldHeight() / 2-textButton3.getHeight());
+                ((ExtendViewport)getViewport()).getMinWorldHeight() / 2 - textButton3.getHeight()/3);
         addActor(textButton3);
-
-
-
-        //valami
-        textButton2 = new MyButton("Play", game.getTextButtonStyle());
-        textButton2.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-                game.setScreen(new PlayScreen(game));
-            }
-        });
-
-        textButton2.setPosition(((ExtendViewport)getViewport()).getMinWorldWidth() / 2 - textButton2.getWidth() / 2,
-                ((ExtendViewport)getViewport()).getMinWorldHeight() / 2 + textButton2.getHeight());
-        addActor(textButton2);
 
         musicOnOff();
 
