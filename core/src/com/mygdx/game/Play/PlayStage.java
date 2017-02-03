@@ -12,6 +12,8 @@ import com.mygdx.game.MyBaseClasses.OneSpriteAnimatedActor;
 import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 import com.mygdx.game.MyGdxGame;
 
+import java.util.ArrayList;
+
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
@@ -27,6 +29,7 @@ public class PlayStage extends MyStage {
 
     private static int dbPotyogas;
 
+    private static ArrayList<OneSpriteStaticActor> esodolgok;
     private static OneSpriteStaticActor palinkaKijelzoActor;
     public static int palinkaSzint, jelenlegiPalinkaSzint;
 
@@ -38,7 +41,7 @@ public class PlayStage extends MyStage {
     public void init() {
         addBackEventStackListener();
 
-
+        esodolgok = new ArrayList<OneSpriteStaticActor>();
 
         //pálinka
         palinkaSzint = 15;
@@ -70,6 +73,7 @@ public class PlayStage extends MyStage {
 
         pozicionalas();
         esik();
+        utkozik();
 
         //pálinkaszint váltása
         palinkaSzint--;
@@ -78,9 +82,33 @@ public class PlayStage extends MyStage {
 
     }
 
+    private void utkozik() {
+        for (int i = 0; i < esodolgok.size(); i++) {
+            OneSpriteStaticActor a = esodolgok.get(i);
+            if(a.getY()+a.getHeight() < 0){
+                a.remove();
+                esodolgok.remove(i);
+                i--;
+            }else{
+                if(kolbaszTolto.getY()+kolbaszTolto.getHeight() > a.getY() && a.getX()+a.getWidth()/2 > kolbaszTolto.getX() && a.getX()-a.getWidth()/2 < kolbaszTolto.getX()+kolbaszTolto.getWidth()){
+                    if(a instanceof Husok){
+                        System.out.println("hus");
+                    }else if( a instanceof NemHusok){
+                        System.out.println("nem hus");
+                    }else if( a instanceof DaraloGyilkos){
+                        System.out.println("dgy");
+                    }
+
+                    a.remove();
+                    esodolgok.remove(i);
+                    i--;
+                }
+            }
+        }
+    }
+
     private void palinkaszint() {
         if (palinkaKijelzoActor != null && jelenlegiPalinkaSzint != palinkaSzint) {
-            System.out.println("asd");
             palinkaKijelzoActor.remove();
             palinkaKijelzoActor = new OneSpriteStaticActor(new PalinkaKijelzo().getTexture());
             addActor(palinkaKijelzoActor);
@@ -107,6 +135,7 @@ public class PlayStage extends MyStage {
             Husok husok = new Husok(t);
             husok.setPosition(vel(0,getViewport().getWorldWidth()-husok.getWidth()),getViewport().getWorldHeight());
             addActor(husok);
+            esodolgok.add(husok);
             husok.setSpeed(speed);
         }
         if(nonhusTime > 5){
@@ -115,6 +144,7 @@ public class PlayStage extends MyStage {
             nemHusok.setRotation(30);
             nemHusok.setPosition(vel(0,getViewport().getWorldWidth()-nemHusok.getWidth()),getViewport().getWorldHeight());
             addActor(nemHusok);
+            esodolgok.add(nemHusok);
             nemHusok.setSpeed(speed+1);
         }
         if(gyilkosTime > 11){
@@ -129,6 +159,7 @@ public class PlayStage extends MyStage {
             daraloGyilkos.setRotation(45);
             daraloGyilkos.setPosition(vel(0,getViewport().getWorldWidth()-daraloGyilkos.getWidth()),getViewport().getWorldHeight());
             addActor(daraloGyilkos);
+            esodolgok.add(daraloGyilkos);
             daraloGyilkos.setSpeed(speed+2);
         }
     }
