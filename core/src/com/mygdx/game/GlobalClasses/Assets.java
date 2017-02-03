@@ -83,7 +83,16 @@ public class Assets {
 	public static final AssetDescriptor<Texture> RONT2
 			= new AssetDescriptor<Texture>("ront/gumicsizma.png", Texture.class);
 
-
+	public static final AssetDescriptor<Texture> DISZNOCSONTVAZ
+			= new AssetDescriptor<Texture>("Diszno/csontvaz.png", Texture.class);
+	public static final AssetDescriptor<Texture> DISZNODARAB1
+			= new AssetDescriptor<Texture>("Diszno/diszno-1.png", Texture.class);
+	public static final AssetDescriptor<Texture> DISZNODARAB2
+			= new AssetDescriptor<Texture>("Diszno/diszno-2.png", Texture.class);
+	public static final AssetDescriptor<Texture> DISZNODARAB3
+			= new AssetDescriptor<Texture>("Diszno/diszno-3.png", Texture.class);
+	public static final AssetDescriptor<Texture> DISZNODARAB4
+			= new AssetDescriptor<Texture>("Diszno/diszno-4.png", Texture.class);
 
 
 

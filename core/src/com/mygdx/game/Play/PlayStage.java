@@ -27,6 +27,8 @@ public class PlayStage extends MyStage {
     private float elapsedTime;
     private int speed = 1;
 
+    public static int darabHus = 0;
+    public static int darabNemHus = 0;
     private static int dbPotyogas;
 
     private static ArrayList<OneSpriteStaticActor> esodolgok;
@@ -92,11 +94,11 @@ public class PlayStage extends MyStage {
             }else{
                 if(kolbaszTolto.getY()+kolbaszTolto.getHeight() > a.getY() && kolbaszTolto.getY()+kolbaszTolto.getHeight() < 100+a.getY() && a.getX()+a.getWidth()/2 > kolbaszTolto.getX() && a.getX()-a.getWidth()/2 < kolbaszTolto.getX()+kolbaszTolto.getWidth()){
                     if(a instanceof Husok){
-                        System.out.println("hus");
+                        darabHus++;
                     }else if( a instanceof NemHusok){
-                        System.out.println("nem hus");
+                        darabNemHus++;
                     }else if( a instanceof DaraloGyilkos){
-                        System.out.println("dgy");
+                        System.out.println("- 1 sziv");
                     }
 
                     a.remove();
