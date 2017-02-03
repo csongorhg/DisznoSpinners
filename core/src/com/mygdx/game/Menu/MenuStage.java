@@ -80,8 +80,6 @@ public class MenuStage extends MyStage {
     }
 
     private void musicOnOff(){
-        System.out.println(1);
-
         musicButton = new OneSpriteStaticActor( music.getVolume() >= 0.9f ?
                 Assets.manager.get(Assets.SOUND) : Assets.manager.get(Assets.NOSOUND));
 

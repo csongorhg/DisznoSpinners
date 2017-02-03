@@ -60,6 +60,9 @@ public class Assets {
 	public static final AssetDescriptor<Texture> TEST_TEXTURE
 			= new AssetDescriptor<Texture>("TestImg/ratyitutu.png", Texture.class);
 
+	public static final AssetDescriptor<Texture> DARALOALLO
+			= new AssetDescriptor<Texture>("atlasok/daralostill.png", Texture.class);
+
 	public static final AssetDescriptor<Texture> HUS1
 			= new AssetDescriptor<Texture>("hus/disznoresz1.png", Texture.class);
 	public static final AssetDescriptor<Texture> HUS2
@@ -112,7 +115,7 @@ public class Assets {
 
 		manager.load(EXPLOSION_TEXTUREATLAS);
 		manager.load(DARALO_TEXTUREATLAS);
-
+		manager.load(DARALOALLO);
 
 		manager.load(MUSIC);
 		manager.load(SOUND);
