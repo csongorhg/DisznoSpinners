@@ -57,6 +57,8 @@ public class Assets {
 			= new AssetDescriptor<Texture>("Menu/hatter.png", Texture.class);
 	public static final AssetDescriptor<Texture> ENDBACKGROUND
 			= new AssetDescriptor<Texture>("Menu/endhatter.png", Texture.class);
+	public static final AssetDescriptor<Texture> INGAMEGROUND
+			= new AssetDescriptor<Texture>("Menu/ingamehatter.png", Texture.class);
 
 
 
@@ -135,6 +137,7 @@ public class Assets {
 
 		manager.load(BACKGROUND);
 		manager.load(ENDBACKGROUND);
+		manager.load(INGAMEGROUND);
 
 		manager.load(HUS1);
 		manager.load(HUS2);
