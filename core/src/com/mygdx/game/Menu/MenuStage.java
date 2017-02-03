@@ -7,7 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyBaseClasses.MyButton;
 import com.mygdx.game.MyBaseClasses.MyStage;
-import com.mygdx.game.OtherScr.OtherScreen;
+import com.mygdx.game.Play.PlayScreen;
 import com.mygdx.game.MyGdxGame;
 
 /**
@@ -15,7 +15,7 @@ import com.mygdx.game.MyGdxGame;
  */
 public class MenuStage extends MyStage {
 
-    private TextButton textButton, textButton2, textButton3, textButton4;
+    private TextButton textButton, textButton2, textButton3;
     private TextButton.TextButtonStyle textButtonStyle;
 
     public MenuStage(Viewport viewport, Batch batch, MyGdxGame game) {
@@ -30,17 +30,43 @@ public class MenuStage extends MyStage {
 
 
 
-        textButton = new MyButton("Play", game.getTextButtonStyle());
-        textButton.addListener(new ClickListener(){
+        //quit
+        textButton3 = new MyButton("Quit", game.getTextButtonStyle());
+        textButton3.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                game.setScreen(new OtherScreen(game));
+                game.setScreen(new PlayScreen(game));
+            }
+        });
+        textButton3.setPosition(getViewport().getWorldWidth() / 2 - textButton3.getWidth() / 2,
+                textButton3.getHeight());
+        addActor(textButton3);
+
+
+
+        //valami
+        textButton2 = new MyButton("Play", game.getTextButtonStyle());
+        textButton2.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                game.setScreen(new PlayScreen(game));
             }
         });
 
-        textButton.setPosition(0,0);
-        addActor(textButton);
+        textButton2.setPosition(getViewport().getWorldWidth() / 2 - textButton2.getWidth() / 2,
+                textButton3.getX() + textButton3.getHeight());
+        addActor(textButton2);
+
+
+
+
+
+
+
+
+
     }
 
 

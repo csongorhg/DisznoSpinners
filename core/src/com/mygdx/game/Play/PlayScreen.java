@@ -1,4 +1,4 @@
-package com.mygdx.game.OtherScr;
+package com.mygdx.game.Play;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -9,18 +9,18 @@ import com.mygdx.game.MyGdxGame;
 /**
  * Created by tuskeb on 2016. 09. 30..
  */
-public class OtherScreen extends MyScreen {
-    protected OtherStage otherStage;
+public class PlayScreen extends MyScreen {
+    protected PlayStage playStage;
 
-    public OtherScreen(MyGdxGame game) {
+    public PlayScreen(MyGdxGame game) {
         super(game);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-        otherStage.act(delta);
-        otherStage.draw();
+        playStage.act(delta);
+        playStage.draw();
 
     }
 
@@ -29,7 +29,13 @@ public class OtherScreen extends MyScreen {
         r = 1;
         g = 0.5f;
         b = 0.3f;
-        otherStage = new OtherStage(new ExtendViewport(1280,720,new OrthographicCamera(1280,720)), spriteBatch, game);
-        Gdx.input.setInputProcessor(otherStage);
+        playStage = new PlayStage(new ExtendViewport(1280,720,new OrthographicCamera(1280,720)), spriteBatch, game);
+        Gdx.input.setInputProcessor(playStage);
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        playStage.dispose();
     }
 }
