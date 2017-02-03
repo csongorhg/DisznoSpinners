@@ -9,6 +9,7 @@ import com.mygdx.game.MyBaseClasses.OneSpriteStaticActor;
 public class Husok extends OneSpriteStaticActor {
 
     private int speed = 1;
+    private float ido = 0;
 
     public Husok(Texture texture) {
         super(texture);
@@ -19,6 +20,8 @@ public class Husok extends OneSpriteStaticActor {
     public void act(float delta) {
         super.act(delta);
         setPosition(getX(), getY()-2*speed);
+        ido+= delta;
+        setRotation(360-ido*100);
 
     }
 

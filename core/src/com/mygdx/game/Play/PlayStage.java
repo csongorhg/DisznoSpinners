@@ -1,6 +1,7 @@
 package com.mygdx.game.Play;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -55,10 +56,6 @@ public class PlayStage extends MyStage {
 
         //potyogoDolgok.add(husok);
 
-
-        husok = new Husok(Assets.manager.get(Assets.TEST_TEXTURE));
-        addActor(husok);
-
         palinkaszint();
 
         }
@@ -93,13 +90,21 @@ public class PlayStage extends MyStage {
             }
         }
     private void esik(){
-        if(elapsedTime > 10){
+        if(elapsedTime > 50){
             elapsedTime = 0;
             speed++;
         }
         if(husTime > 2){
             husTime = 0;
-            Husok husok = new Husok(Assets.manager.get(Assets.TEST_TEXTURE));
+            int ez = vel(1,5);
+            Texture t = null;
+            if(ez == 1) t = Assets.manager.get(Assets.HUS1);
+            else if(ez == 2) t = Assets.manager.get(Assets.HUS2);
+            else if(ez == 3) t = Assets.manager.get(Assets.HUS3);
+            else if(ez == 4) t = Assets.manager.get(Assets.HUS4);
+            else if(ez == 5) t = Assets.manager.get(Assets.HUS5);
+
+            Husok husok = new Husok(t);
             husok.setPosition(vel(0,getViewport().getWorldWidth()-husok.getWidth()),getViewport().getWorldHeight());
             addActor(husok);
             husok.setSpeed(speed);
@@ -114,12 +119,22 @@ public class PlayStage extends MyStage {
         }
         if(gyilkosTime > 11){
             gyilkosTime = 0;
-            DaraloGyilkos daraloGyilkos = new DaraloGyilkos(Assets.manager.get(Assets.TEST_TEXTURE));
+            int ez = vel(1,3);
+            Texture t = null;
+            if(ez == 1) t = Assets.manager.get(Assets.GYILKOS1);
+            else if(ez == 2) t = Assets.manager.get(Assets.GYILKOS1);
+            else if(ez == 3) t = Assets.manager.get(Assets.GYILKOS1);
+
+            DaraloGyilkos daraloGyilkos = new DaraloGyilkos(t);
             daraloGyilkos.setRotation(45);
             daraloGyilkos.setPosition(vel(0,getViewport().getWorldWidth()-daraloGyilkos.getWidth()),getViewport().getWorldHeight());
             addActor(daraloGyilkos);
             daraloGyilkos.setSpeed(speed+2);
         }
+    }
+
+    private int vel(int a, int b){
+        return (int)(Math.random()*(b-a+1)+a);
     }
 
     private float vel(float a, float b){

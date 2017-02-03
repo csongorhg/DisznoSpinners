@@ -49,6 +49,23 @@ public class Assets {
 	public static final AssetDescriptor<Texture> TEST_TEXTURE
 			= new AssetDescriptor<Texture>("TestImg/ratyitutu.png", Texture.class);
 
+	public static final AssetDescriptor<Texture> HUS1
+			= new AssetDescriptor<Texture>("hus/disznoresz1.png", Texture.class);
+	public static final AssetDescriptor<Texture> HUS2
+			= new AssetDescriptor<Texture>("hus/disznoresz2.png", Texture.class);
+	public static final AssetDescriptor<Texture> HUS3
+			= new AssetDescriptor<Texture>("hus/disznoresz3.png", Texture.class);
+	public static final AssetDescriptor<Texture> HUS4
+			= new AssetDescriptor<Texture>("hus/disznoresz4.png", Texture.class);
+	public static final AssetDescriptor<Texture> HUS5
+			= new AssetDescriptor<Texture>("hus/disznoresz5.png", Texture.class);
+
+	public static final AssetDescriptor<Texture> GYILKOS1
+			= new AssetDescriptor<Texture>("gyilkos/csont.png", Texture.class);
+
+
+
+
 
 
     public static void prepare() {
@@ -69,6 +86,13 @@ public class Assets {
 		manager.load(EXTREMEACTION);
 
 		manager.load(ACMEREGULAR_FONT);
+
+		manager.load(HUS1);
+		manager.load(HUS2);
+		manager.load(HUS3);
+		manager.load(HUS4);
+		manager.load(HUS5);
+		manager.load(GYILKOS1);
 	}
 
     public static void afterLoaded() {

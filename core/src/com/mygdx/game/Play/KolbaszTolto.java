@@ -13,8 +13,8 @@ public class KolbaszTolto extends OneSpriteAnimatedActor {
     private OneSpriteAnimatedActor oneSpriteAnimatedActor;
 
     public KolbaszTolto() {
-        super(Assets.manager.get(Assets.EXPLOSION_TEXTUREATLAS));
-        setSize(100,100);
+        super(Assets.manager.get(Assets.DARALO_TEXTUREATLAS));
+        setSize(200,200);
         setFps(30);
     }
 
