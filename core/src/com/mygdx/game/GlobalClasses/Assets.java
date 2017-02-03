@@ -55,6 +55,8 @@ public class Assets {
 	//BACKGROUND
 	public static final AssetDescriptor<Texture> BACKGROUND
 			= new AssetDescriptor<Texture>("Menu/hatter.png", Texture.class);
+	public static final AssetDescriptor<Texture> ENDBACKGROUND
+			= new AssetDescriptor<Texture>("Menu/endhatter.png", Texture.class);
 
 
 
@@ -132,6 +134,7 @@ public class Assets {
 		manager.load(ACMEREGULAR_FONT);
 
 		manager.load(BACKGROUND);
+		manager.load(ENDBACKGROUND);
 
 		manager.load(HUS1);
 		manager.load(HUS2);

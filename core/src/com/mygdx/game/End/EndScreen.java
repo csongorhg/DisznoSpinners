@@ -67,7 +67,7 @@ public class EndScreen extends MyScreen {
                 r = 0;
                 g = 0;
                 b = 0;
-                backGroundActor = new OneSpriteStaticActor(Assets.manager.get(Assets.BACKGROUND));
+                backGroundActor = new OneSpriteStaticActor(Assets.manager.get(Assets.ENDBACKGROUND));
                 backGroundActor.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                 setCameraZoomXY(backGroundActor.getWidth() / 2, backGroundActor.getHeight() / 2, 40);
                 setCameraMoveToXY(backGroundActor.getWidth() / 2
