@@ -90,7 +90,7 @@ public class PlayStage extends MyStage {
                 esodolgok.remove(i);
                 i--;
             }else{
-                if(kolbaszTolto.getY()+kolbaszTolto.getHeight() > a.getY() && a.getX()+a.getWidth()/2 > kolbaszTolto.getX() && a.getX()-a.getWidth()/2 < kolbaszTolto.getX()+kolbaszTolto.getWidth()){
+                if(kolbaszTolto.getY()+kolbaszTolto.getHeight() > a.getY() && kolbaszTolto.getY()+kolbaszTolto.getHeight() < 100+a.getY() && a.getX()+a.getWidth()/2 > kolbaszTolto.getX() && a.getX()-a.getWidth()/2 < kolbaszTolto.getX()+kolbaszTolto.getWidth()){
                     if(a instanceof Husok){
                         System.out.println("hus");
                     }else if( a instanceof NemHusok){
