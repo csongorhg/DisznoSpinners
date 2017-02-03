@@ -2,6 +2,7 @@ package com.mygdx.game.Loading;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.mygdx.game.End.EndScreen;
 import com.mygdx.game.Menu.MenuScreen;
 import com.mygdx.game.Menu.MenuStage;
 import com.mygdx.game.MyBaseClasses.MyScreen;
