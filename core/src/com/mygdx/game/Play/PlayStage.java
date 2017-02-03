@@ -140,8 +140,7 @@ public class PlayStage extends MyStage {
         }
         if(nonhusTime > 5){
             nonhusTime = 0;
-            NemHusok nemHusok = new NemHusok(Assets.manager.get(Assets.TEST_TEXTURE));
-            nemHusok.setRotation(30);
+            NemHusok nemHusok = new NemHusok(vel(0,1) == 0 ? Assets.manager.get(Assets.RONT1) : Assets.manager.get(Assets.RONT2));
             nemHusok.setPosition(vel(0,getViewport().getWorldWidth()-nemHusok.getWidth()),getViewport().getWorldHeight());
             addActor(nemHusok);
             esodolgok.add(nemHusok);
@@ -152,11 +151,10 @@ public class PlayStage extends MyStage {
             int ez = vel(1,3);
             Texture t = null;
             if(ez == 1) t = Assets.manager.get(Assets.GYILKOS1);
-            else if(ez == 2) t = Assets.manager.get(Assets.GYILKOS1);
-            else if(ez == 3) t = Assets.manager.get(Assets.GYILKOS1);
+            else if(ez == 2) t = Assets.manager.get(Assets.GYILKOS2);
+            else if(ez == 3) t = Assets.manager.get(Assets.GYILKOS3);
 
             DaraloGyilkos daraloGyilkos = new DaraloGyilkos(t);
-            daraloGyilkos.setRotation(45);
             daraloGyilkos.setPosition(vel(0,getViewport().getWorldWidth()-daraloGyilkos.getWidth()),getViewport().getWorldHeight());
             addActor(daraloGyilkos);
             esodolgok.add(daraloGyilkos);
