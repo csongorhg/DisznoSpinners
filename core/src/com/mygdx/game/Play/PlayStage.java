@@ -143,8 +143,8 @@ public class PlayStage extends MyStage {
         utkozik();
 
 
-        //pálinkaszint váltása - 10mp ként 1 fogy
-        if (palinkaIdozito >= 10) {
+        //pálinkaszint váltása - 5mp ként 1 fogy
+        if (palinkaIdozito >= 5) {
             palinkaSzint--;
             palinkaIdozito = 0;
             palinkaszint();
@@ -340,7 +340,7 @@ public class PlayStage extends MyStage {
             palinka.setPosition(vel(((ExtendViewport) getViewport()).getMaxWorldWidth(), ((ExtendViewport) getViewport()).getMinWorldWidth() - palinka.getWidth()), getViewport().getWorldHeight());
             addActor(palinka);
             esodolgok.add(palinka);
-            palinka.setSpeed(speed + 1);
+            palinka.setSpeed(speed + 3);
         }
 
     }
@@ -366,5 +366,8 @@ public class PlayStage extends MyStage {
     @Override
     public void dispose() {
         super.dispose();
+        kolbaszTolto.remove();
+        husdaraloSound.stop();
+        husdaraloSound.zene.dispose();
     }
 }
